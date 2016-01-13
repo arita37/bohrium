@@ -271,6 +271,14 @@ DLLEXPORT void bh_flag_constant(bh_view* o);
  */
 DLLEXPORT bh_view bh_view_simplify(const bh_view &view);
 
+/* Simplifies, and removes repetisions (i.e. stride == 0)  
+ * dimensions
+ *
+ * @view The view
+ * @return The super_simplified view
+ */
+DLLEXPORT bh_view bh_view_super_simplify(const bh_view& view);
+
 /* Simplifies the given view down to the given shape.
  * If that is not possible an std::invalid_argument exception is thrown 
  *

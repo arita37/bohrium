@@ -277,6 +277,38 @@ inline int gcd(int a, int b)
     return b;
 }
 
+
+/* Simplifies, and removes repetisions (i.e. stride == 0)  
+ * dimensions
+ *
+ * @view The view
+ * @return The super_simplified view
+ */
+bh_view bh_view_super_simplify(const bh_view& view)
+{
+    bh_view sv = bh_view_simplify(view);
+    bh_view res;
+    res.base = sv.base;
+    res.ndim = 0;
+    res.start = sv.start;
+    bh_intp i = 0;
+    while (sv.stride[i] == 0 && i < sv.ndim-1)
+        ++i;
+    res.shape[0] = sv.shape[i];
+    res.stride[0] = sv.stride[i];
+    for (++i; i < sv.ndim; ++i)
+    {
+        if (sv.stride[i] == 0)
+            continue;
+        else {
+            ++res.ndim;
+            res.shape[res.ndim]  = sv.shape[i];
+            res.stride[res.ndim] = sv.stride[i];
+        }
+    }
+    return res;
+}
+
 /* Returns the simplest view (fewest dimensions) that access
  * the same elements in the same pattern
  *
@@ -448,8 +480,8 @@ bool bh_view_aligned(const bh_view *a, const bh_view *b)
 {
     if(bh_is_constant(a) || bh_is_constant(b))
         return true;
-    bh_view sa = bh_view_simplify(*a);
-    bh_view sb = bh_view_simplify(*b);
+    bh_view sa = bh_view_super_simplify(*a);
+    bh_view sb = bh_view_super_simplify(*b);
     return sa == sb;
 }
 
