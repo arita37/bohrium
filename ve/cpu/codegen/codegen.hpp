@@ -201,10 +201,10 @@ std::string _omp_atomic(std::string expr);
 
 std::string _beef(std::string info);
 
-class Block
+class Codeblock
 {
 public:
-    Block(Plaid& plaid, std::string template_fn);
+    Codeblock(Plaid& plaid, std::string template_fn);
     
     void prolog(std::string source);
 
@@ -237,19 +237,17 @@ private:
 
     std::string template_fn_;
 
-    std::sstream prolog_;
+    std::stringstream prolog_;
 
-    std::sstream epilog_;
+    std::stringstream epilog_;
 
-    std::sstream pragma_;
+    std::stringstream pragma_;
 
-    std::sstream head_;
+    std::stringstream head_;
 
-    std::sstream body_;
+    std::stringstream body_;
 
-    std::sstream foot_;
-
-private:
+    std::stringstream foot_;
 };
 
 class Buffer

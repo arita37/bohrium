@@ -10,65 +10,65 @@ namespace kp{
 namespace engine{
 namespace codegen{
 
-Block::Block(void) : _template_fn("block.tpl") {}
-Block::Block(std::string template_fn) : _template_fn(template_fn) {}
+Codeblock::Codeblock(void) : _template_fn("block.tpl") {}
+Codeblock::Codeblock(std::string template_fn) : _template_fn(template_fn) {}
 
-void Block::prolog(string source)
+void Codeblock::prolog(string source)
 {
     prolog_ << source;    
 }
 
-void Block::epilog(string source)
+void Codeblock::epilog(string source)
 {
     epilog_ << source;    
 }
 
-void Block::pragma(string source)
+void Codeblock::pragma(string source)
 {
     pragma_ << source;    
 }
 
-void Block::head(string source)
+void Codeblock::head(string source)
 {
     head_ << source;    
 }
 
-void Block::body(string source)
+void Codeblock::body(string source)
 {
     body_ << source;    
 }
 
-void Block::foot(string source)
+void Codeblock::foot(string source)
 {
     foot_ << source;    
 }
 
-std::string Block::prolog(void)
+std::string Codeblock::prolog(void)
 {
     return prolog_.str();
 }
 
-std::string Block::epilog(void)
+std::string Codeblock::epilog(void)
 {
     return epilog_.str();
 }
 
-std::string Block::pragma(void)
+std::string Codeblock::pragma(void)
 {
     return pragma_.str();
 }
 
-std::string Block::head(void)
+std::string Codeblock::head(void)
 {
     return head_.str();
 }
 
-std::string Block::body(void)
+std::string Codeblock::body(void)
 {
     return body_.str();
 }
 
-std::string Block::foot(void)
+std::string Codeblock::foot(void)
 {
     return foot_.str();
 }
